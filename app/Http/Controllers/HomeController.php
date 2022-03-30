@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Comments;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
@@ -9,14 +10,9 @@ use App\BillDetail;
 use App\Bill;
 use App\Cart;
 use App\SlideShow;
-use App\News;
 use App\Contact;
-use App\BillStatus;
 use App\PaymentStatus;
 use Illuminate\Support\Facades\Auth;
-use Session;
-use Mail;
-use App\Mail\SendMail;
 
 class HomeController extends Controller
 {
@@ -34,10 +30,9 @@ class HomeController extends Controller
         $product_featured = Product::all()->where('status', '==', 1)->sortByDesc('prince')->take(8);
         $product_new = Product::all()->where('status', '==', 1)->sortDesc()->take(8);
         $slideshow = Slideshow::all();
-        $news = News::all()->where('image', '!=', Null)->where('status', '==', 1)->sortBy('sort_order')->sortDesc()->take(3);
         $banner1 = Category::all()->where('avatar', '!=', null)->sortBy('sort_order')->take(2);
         $banner2 = Category::all()->where('avatar', '!=', null)->sortByDesc('sort_order')->take(2);
-        return view('index')->with(['banner1' => $banner1, 'banner2' => $banner2, 'product_sale' => $product_sale, 'product_limited' => $product_limited, 'product_featured' => $product_featured, 'product_new' => $product_new, 'slideShow' => $slideshow, 'news' => $news]);
+        return view('index')->with(['banner1' => $banner1, 'banner2' => $banner2, 'product_sale' => $product_sale, 'product_limited' => $product_limited, 'product_featured' => $product_featured, 'product_new' => $product_new, 'slideShow' => $slideshow]);
     }
 
     public function getList($id, $name){
@@ -52,9 +47,9 @@ class HomeController extends Controller
 
     public function getDetail($id, $name){
         $product = Product::find($id);
-        $category = Category::where('parent_id', '!=', 0)->get();
         $product_other = Product::where('id', '!=', $id)->where('category_id', "=", $product->category_id)->take(8)->get();
-        return view('detail_product')->with(['product'=> $product, 'category' => $category, 'product_other' => $product_other]);
+        $comments = Comments::all()->where('product_id', $id);
+        return view('detail_product')->with(['product'=> $product, 'product_other' => $product_other, 'comments' => $comments]);
     }
 
     public function quickView(Request $request)
@@ -65,9 +60,10 @@ class HomeController extends Controller
         return response()->json($product);
     }
 
+
     public function checkout()
     {
-        if (!Session::has('cart')){
+        if (!Cart::get('id')){
             return redirect()->route('home.index');
         }
         $payment_status = PaymentStatus::all();
@@ -81,23 +77,9 @@ class HomeController extends Controller
             'address' => 'required|min:2|max:255',
             'password' => 'max:50',
         ]);
-
-        if(Auth::guard('customer')->check()){
-            $customer = Customer::find(Auth::guard('customer')->user()->id);
-        } else {
-            $customer = new Customer();
-            $customer->name = $request->name;
-            $customer->phone = $request->phone;
-            $customer->address = $request->address;
-            $customer->email = $request->email;
-            if($request->password != ''){
-                $customer->password = bcrypt($request->password);
-            }
-            $customer->save();
-        }
-
+        $userId = Auth::guard('customer')->user()->id;
         $bill = new Bill();
-        $bill->customer_id = $customer->id;
+        $bill->customer_id = $userId;
         $bill->created = date('Y-m-d H:i:s');
         $bill->payment_id = $request->payment_id;
         $bill->note = $request->note;
@@ -106,35 +88,27 @@ class HomeController extends Controller
         $bill->phone = $request->phone;
         $bill->address = $request->address;
         $bill->save();
-
-        $cart = Session::get('cart');
-        foreach ($cart as $id => $item){
+        $cart = Cart::where(['customer_id' => $userId]);
+        foreach ($cart->get() as $id => $item){
             $billDetail = new BillDetail();
             $billDetail->bill_id = $bill->id;
-            $billDetail->product_id = $id;
+            $billDetail->product_id = $item->product_id;
             $billDetail->quantity = $item->quantity;
-            $billDetail->price = $item->price;
+            $billDetail->price = $item->product->price;
             $billDetail->save();
         }
-
-//         if($customer->email != null){
-//             Mail::to($customer->email)->send(new SendMail($bill->id));
-//         }
         return redirect()->route('home.checkout.success');
     }
 
     public function confirmOder()
     {
-        if (!Session::has('cart')){
+        if (!Cart::get('id')){
             return redirect()->route('home.index');
         }
-        Session::forget('cart');
+        Cart::where(['customer_id' => Auth::guard('customer')->user()->id])->delete();
         return view('confirm_order');
     }
 
-    public function historyOder()
-    {
-    }
 
     //Login & Register
     public function loginpage(){

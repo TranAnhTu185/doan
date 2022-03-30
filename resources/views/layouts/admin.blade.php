@@ -207,12 +207,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.news') }}">
-                        <i class="mdi mdi-newspaper menu-icon"></i>
-                        <span class="menu-title">Quản Lý Tin Tức</span>
-                    </a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.user') }}">
                         <i class="mdi mdi-account-settings-variant menu-icon"></i>

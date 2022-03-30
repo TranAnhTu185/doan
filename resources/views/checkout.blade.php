@@ -186,22 +186,23 @@
     function load(cart) {
         let list = $("[data-cart='products']");
         list.html("");
+        let total = 0;
 
-        let products = cart['cart'];
 
-        $.each(products, function (id, prod) {
+        $.each(cart, function (id, prod) {
+            total += prod.quantity * prod.product.price;
             list.append('<tr class="cart_item">\
                                 <td class="product-name">\
-                                    <a href="' + prod.link + '">' + prod.name +
+                                    <a href="' + prod.link + '">' + prod.product.name +
                 ' <strong class="product-quantity"> × ' + prod.quantity + '</strong></a>\
                                 </td>\
                                 <td class="product-total">\
-                                    <span class="amount">' + formatNumber(prod.price) + '</span>\
+                                    <span class="amount">' + formatNumber(prod.product.price) + '</span>\
                                 </td>\
                             </tr>');
         });
 
-        $("[data-cart='total']").html("Tổng cộng: " + formatNumber(cart['total']));
+        $("[data-cart='total']").html("Tổng cộng: " + formatNumber(total));
 
         if (cart['count'] == 0) {
             list.append('<tr><td colspan="5" class="text-center">Không có sản phẩm nào trong giỏ hàng</td></tr>');

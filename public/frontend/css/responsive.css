@@ -725,8 +725,17 @@
         top: -40px;
     }
     .header-2 .logo-menu-wrapper {
-        padding-top: 30px;
+        padding-top: 42px;
+        height: 100%;
     }
+    .header-2 .logo-menu-wrapper .pr-100 {
+        padding: 0;
+    }
+
+    .header-2 .logo-menu-wrapper .pr-100 img {
+        width: 100%;
+    }
+
     .stick.header-2 .logo-menu-wrapper {
         padding-top: 0px;
     }
@@ -948,16 +957,16 @@
     .blog-gallery-slider .owl-nav div, .slider-active .owl-nav div {
       left: 20px;
         font-size: 25px;
-    }    
-    
+    }
+
     .footer-widget.mb-30.f-right {
       float: left;
     }
-    
-    
-    
-    
-    
+
+
+
+
+
 }
 
 
@@ -977,7 +986,7 @@
     .footer-widget.mb-30.f-right {
       float: left;
     }
-    
-    
-    
+
+
+
 }

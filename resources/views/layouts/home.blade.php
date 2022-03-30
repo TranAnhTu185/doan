@@ -79,7 +79,6 @@
                                          x-placement="bottom-start"
                                          style="position: absolute; transform: translate3d(148px, 44px, 0px); top: 0px; left: 0px; will-change: transform;">
                                         <h6 class="dropdown-header">Cài đặt</h6>
-                                         <a class="dropdown-item" href="{{ route('home.change-page') }}">Đổi mật khẩu</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('home.logout') }}">Đăng xuất</a>
                                     </div>

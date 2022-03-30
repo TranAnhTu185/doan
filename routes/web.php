@@ -22,15 +22,14 @@ Route::get('chi-tiet/{id}-{name}.html', 'HomeController@getDetail')->name('home.
 Route::get('xem-nhanh', 'HomeController@quickView')->name('home.quickview');
 //cart
 Route::group(['prefix' => 'gio-hang'], function () {
-    Route::get('hien-thi','CartController@getCart')->name('home.cart.get');
-    Route::post('them', 'CartController@addCart')->name('home.cart.add');
-    Route::get('sua', 'CartController@changeQuantity')->name('home.cart.change');
-    Route::get('xoa', 'CartController@removeInCart')->name('home.cart.delete');
-    Route::get('/', 'CartController@viewCart')->name('home.cart');
+        Route::get('hien-thi','CartController@getCart')->name('home.cart.get')->middleware('customer');
+        Route::post('them', 'CartController@addCart')->name('home.cart.add')->middleware('customer');
+        Route::get('xoa', 'CartController@removeInCart')->name('home.cart.delete')->middleware('customer');
+        Route::get('/', 'CartController@viewCart')->name('home.cart')->middleware('customer');
 });
 //checkout
 Route::get('thanh-toan.html', 'HomeController@checkout')->name('home.checkout');
-Route::post('thanh-toan.html', 'HomeController@storeBill')->name('home.checkout.store');
+Route::post('thanh-toan.html', 'HomeController@storeBill')->name('home.checkout.store')->middleware('customer');
 Route::get('dat-hang-thanh-cong.html', 'HomeController@confirmOder')->name('home.checkout.success');
 Route::get('lich-su-don-hang.html', 'HomeController@historyOder')->name('home.checkout.history');
 //login & register
@@ -38,8 +37,6 @@ Route::get('dang-nhap.html', 'HomeController@loginpage')->name('home.loginpage')
 Route::post('dang-nhap.html', 'HomeController@login')->name('home.login');
 Route::post('dang-ky.html', 'HomeController@register')->name('home.register');
 Route::get('dang-xuat.html', 'HomeController@logout')->name('home.logout');
-Route::get('doi-mat-khau.html', 'HomeController@changePage')->name('home.change-page');
-Route::post('doi-mat-khau.html', 'HomeController@changePass')->name('home.change-pass');
 //search
 Route::get('tim-kiem.html','HomeController@search')->name('home.search');
 //contact
@@ -64,7 +61,10 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('edit/{id}', 'Admin\ProductController@edit')->name('admin.product.edit');
             Route::post('update/{id}', 'Admin\ProductController@update')->name('admin.product.update');
             Route::get('destroy/{id}', 'Admin\ProductController@destroy')->name('admin.product.destroy');
+            Route::get('comment/{id}', 'Admin\ProductController@showComment')->name('admin.comment');
+            Route::get('comment/delete/{id}', 'Admin\ProductController@deleteCommentProduct')->name('admin.comment.delete');
         });
+
 
         //customer
         Route::group(['prefix' => 'customer'], function () {
@@ -98,16 +98,6 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('edit-payment/{id}', 'Admin\BillController@editPayment')->name('admin.bill.edit-payment');
             Route::post('update-payment', 'Admin\BillController@updatePayment')->name('admin.bill.update-payment');
             Route::get('delete-payment/{id}', 'Admin\BillController@deletePayment')->name('admin.bill.delete-payment');
-        });
-
-        //news
-        Route::group(['prefix' => 'news'], function () {
-            Route::get('/', 'Admin\NewsController@index')->name('admin.news');
-            Route::get('create', 'Admin\NewsController@create')->name('admin.news.create');
-            Route::post('store', 'Admin\NewsController@store')->name('admin.news.store');
-            Route::get('edit/{id}', 'Admin\NewsController@edit')->name('admin.news.edit');
-            Route::post('update/{id}', 'Admin\NewsController@update')->name('admin.news.update');
-            Route::get('destroy/{id}', 'Admin\NewsController@destroy')->name('admin.news.destroy');
         });
 
         //user

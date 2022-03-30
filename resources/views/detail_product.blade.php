@@ -75,18 +75,6 @@
                             </div>
                         </form>
                     </div>
-                    <div class="product-categories">
-                        <h5 class="pd-sub-title">Danh Mục</h5>
-                        <ul>
-                            @foreach($category as $item)
-                                <li>
-                                    <a
-                                        href="{{ route('home.list', [ $item->id, $item->getUrl()]) }}">{{ $item->name }}
-                                        ,</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
                     <div class="product-share">
                         <h5 class="pd-sub-title">Chia Sẻ</h5>
                         <ul>
@@ -106,9 +94,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 mx-auto mt-3">
-                <p>{!! $product->content !!}</p>
-            </div>
+{{--            <div class="col-12 mx-auto mt-3">--}}
+{{--                <p>{!! $product->content !!}</p>--}}
+{{--            </div>--}}
         </div>
     </div>
 </div>
@@ -149,6 +137,28 @@
                                     <span class="old">{{ number_format($item->price) }}₫</span>
                                     <span>{{ number_format($item->newPrice()) }}₫</span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
+<div class="brand-logo-area hm-4-padding mb-3">
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="breadcrumb-content text-center border-top-2">
+                <h2>ĐÁNH GIÁ CỦA KHÁCH HÀNG</h2>
+            </div>
+            <div class="row w-1200px">
+                @foreach($comments as $item)
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <div class="comment-wrapper mb-25">
+                            <h3 class="comment-title">{{ $item->customer->name }}</h3>
+                            <div class="comment-content">
+                                <p class="comment-content--time">{{ $item->created_at }}</p>
+                                <p class="comment-content--des">{{ $item->content }}</p>
                             </div>
                         </div>
                     </div>

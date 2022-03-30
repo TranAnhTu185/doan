@@ -68,34 +68,31 @@ Giỏ hàng
 <script>
     $(".header-cart").remove();
 
+
     function load(cart) {
         let list = $("[data-cart='products']");
         list.html("");
+        let total = 0;
 
-        let products = cart['cart'];
-
-        $.each(products, function (id, prod) {
+        $.each(cart, function (id, prod) {
+            total += prod.quantity * prod.product.price;
             list.append('<tr>\
                             <td class="product-thumbnail">\
-                                <a href="#"><img src="' + prod.image + '" alt=""></a>\
+                                <a href="#"><img src="'+ '/backend/images/product/' + prod.product.product_image[0].name+'" alt=""></a>\
                             </td>\
                             <td class="product-name">\
-                                <a href="' + prod.link + '">' + prod.name + '</a>\
+                                <a href="' + prod.link + '">' + prod.product.name + '</a>\
                             </td>\
-                            <td class="product-price"><span class="amount">' + prod.price +
-                '</span></td>\
+                            <td class="product-price"><span class="amount">' + prod.product.price + '</span></td>\
                             <td class="product-quantity">\
-                                <div class="quantity-range quantity">\
-                                    <input class="input-text qty text" type="number" step="1" onchange="changeQty(this, ' + id + ')" min="0" value="' + prod.quantity + '" title="số lượng" size="4">\
-                                </div>\
+                                <div class="quantity-range quantity">' +prod.quantity+ '</div>\
                             </td>\
-                            <td class="product-subtotal">' + prod.price * prod.quantity + '</td>\
-                            <td class="product-cart-icon product-subtotal"><a href="#" onclick="removeCart(this, ' +
-                id + ')"><i class="ion-ios-trash-outline" aria-hidden="true"></i></a></td>\
+                            <td class="product-subtotal">' + prod.product.price * prod.quantity + '</td>\
+                            <td class="product-cart-icon product-subtotal"><a href="#" onclick="removeCart(this, '+prod.product_id+')"><i class="ion-ios-trash-outline" aria-hidden="true"></i></a></td>\
                         </tr>');
         });
 
-        $("[data-cart='total']").html("Tổng cộng: " + formatNumber(cart['total']));
+        $("[data-cart='total']").html("Tổng cộng: " + formatNumber(total));
 
         if (cart['count'] == 0) {
             list.append('<tr><td colspan="5" class="text-center">Không có sản phẩm nào trong giỏ hàng</td></tr>');
@@ -109,6 +106,7 @@ Giỏ hàng
             id: id,
             quantity: e.value
         }, function (data, status) {
+            console.log(data);
             if (status == 'success' && data.status != 'error') {
                 load(data);
             }

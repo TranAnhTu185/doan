@@ -3,119 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Session;
 use App\Product;
 use App\Cart;
+use Illuminate\Support\Facades\Auth;
+use Javascript;
 
 class CartController extends Controller
 {
 
-    //Cart
-    public function viewCart(){
-        $total = 0;
-        $cart = [];
-        if(Session::has("cart")) {
-            $cart = Session::get("cart");
-            foreach ($cart as $value) {
-                $total += $value->price;
-            }
-        }
-        return view('cart')->with('total', $total);
-    }
-
     public function getCart() {
-        $total = 0;
-        $count = 0;
-        $cart = [];
-        if(Session::has("cart")) {
-            $cart = Session::get("cart");
-
-            foreach ($cart as $id => $item) {
-                $product = Product::find($id);
-
-                $item->name = $product->name;
-                $item->price = $product->newPrice();
-                $item->image = "/backend/images/product/".$product->product_image[0]->name;
-                $item->link = route('home.detail', [$product->id, $product->getUrl()]);
-
-                $total += $item->price * $item->quantity;
-                $count += $item->quantity;
-            }
-        }
-
-        return response()->json([
-            'cart' => $cart,
-            'total' => $total,
-            'count' => $count
-        ]);
+        $carts = Cart::where('customer_id', Auth::guard('customer')->user()->id)->with('product', 'product.product_image')->get();
+        return response()->json($carts);
     }
 
     public function addCart(Request $request) {
-        $cart = [];
-        if(Session::has("cart")) {
-            $cart = Session::get("cart");
-        }
-
-        $quantity = 1;
-        if($request->has('quantity')) {
-            $quantity = $request->quantity;
-        }
-
-        $product = Product::find($request->has("id") ? $request->id : -1);
-
-        if($product != null) {
-            if(isset($cart[$request->id])) {
-                $cur_cart = $cart[$request->id];
-                $cur_cart->quantity += $quantity;
-            } else {
-                $new_cart = new Cart();
-
-                $new_cart->quantity = $quantity;
-
-                $cart[$product->id] = $new_cart;
-            }
-
-            Session::put(['cart' => $cart]);
+        $user = Auth::guard('customer')->user()->id;
+        $productId = $request->product_id;
+        $quantity = $request->quantity ? $request->quantity : 1;
+        $cart = Cart::where(['customer_id' => $user, 'product_id' => $productId])->first();
+        if ($cart) {
+            $cart->quantity += $quantity;
+            $cart->save();
         } else {
-            return response()->json(['status'=>'error']);
+            $cart = new Cart();
+            $cart->customer_id = Auth::guard('customer')->user()->id;
+            $cart->quantity = $quantity;
+            $cart->product_id = $productId;
+            $cart->save();
         }
-        return $this->getCart();
-    }
-
-    public function changeQuantity(Request $request) {
-        $cart = [];
-        if(Session::has("cart")) {
-            $cart = Session::get("cart");
-        }
-
-        if(isset($cart[$request->id])) {
-            $cur_cart = $cart[$request->id];
-            if ($request->quantity == 0){
-                unset($cart[$request->id]);
-            } else {
-                $cur_cart->quantity = $request->quantity;
-            }
-            Session::put(['cart' => $cart]);
-        } else {
-            return response()->json(['status'=>'error']);
-        }
-
-        return $this->getCart();
+        return response()->json(['message' => 'add cart success'], 200);
     }
 
     public function removeInCart(Request $request) {
-        $cart = [];
-        if(Session::has("cart")) {
-            $cart = Session::get("cart");
-        }
+        $user = Auth::guard('customer')->user()->id;
+        $productId = $request->product_id;
+        $cart = Cart::where(['customer_id' => $user, 'product_id' => $productId])->delete();
+        return response()->json(['message' => 'remove cart success'], 200);
+    }
 
-        if(isset($cart[$request->id])) {
-            unset($cart[$request->id]);
-            Session::put(['cart' => $cart]);
-        } else {
-            return response()->json(['status'=>'error']);
-        }
-
-        return $this->getCart();
+    public function viewCart() {
+        $carts = Cart::where('customer_id', Auth::guard('customer')->user()->id)->with('product', 'product.product_image')->get();
+        return view('cart')->with(['cart' => $carts]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Comments;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Image;
@@ -84,11 +85,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showComment($id)
     {
-        //Show Product
-        $product = Product::find($id);
-        return view('admin.product.show')->with('product', $product);
+        $comments = Comments::all()->where('product_id', $id);
+        return view('admin.comment.index')->with(['comments' => $comments]);
     }
 
     /**
@@ -168,5 +168,18 @@ class ProductController extends Controller
         }
         $product->delete();
         return redirect()->route('admin.product')->with('success', 'Delete success');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteCommentProduct($id)
+    {
+        $comment = Comments::find($id);
+        $comment->delete();
+        return  redirect()->route('admin.comment')->with('success', 'Deletecomment success');
     }
 }

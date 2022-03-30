@@ -12,34 +12,42 @@ function formatNumber(nStr, decSeperate = ",", groupSeperate = ",") {
     return x1 + x2;
 }
 
-$.get('/gio-hang/hien-thi', function(data, status) {
-    if (status == 'success') load(data);
-});
+function loadCart() {
+    $.get('/gio-hang/hien-thi', function(data, status) {
+        if (status == 'success') load(data);
+    });
+}
+loadCart();
 
 function load(cart) {
     let list = $("[data-cart='products']");
     list.html("");
+    let count = 0;
+    let total = 0;
 
-    let products = cart['cart'];
-
-    $.each(products, function(id, prod) {
-        list.append('<li class="single-product-cart">\
+    if (cart.length > 0) {
+        $.each(cart, function(id, prod) {
+            count += prod.quantity;
+            total += prod.quantity * prod.product.price;
+            // console.log(prod)
+            list.append('<li class="single-product-cart">\
         <div class="cart-img">\
-            <a href="#"><img src="'+prod.image+'" alt=""></a>\
+            <a href="#"><img src="'+ '/backend/images/product/' + prod.product.product_image[0].name+'" alt=""></a>\
         </div>\
         <div class="cart-title">\
-            <h3><a href="'+prod.link+'"> '+prod.name+'</a></h3>\
-            <span>'+prod.quantity+' x '+prod.price +'</span>\
+            <h3><a href="'+prod.link+'"> '+prod.product.name+'</a></h3>\
+            <span>'+prod.quantity+' x '+prod.product.price +'</span>\
         </div>\
         <div class="cart-delete">\
-            <a href="#" onclick="removeCart(this, '+id+')"><i class="ti-trash"></i></a>\
+            <a href="#" onclick="removeCart(this, '+prod.product_id+')"><i class="ti-trash"></i></a>\
         </div>\
     </li>');
-    });
+        });
+    }
 
-    $("[data-cart='total']").html(formatNumber(cart['total']));
-    $("[data-cart='count']").html(cart['count']);
-    if (cart['count'] == 0) {
+    $("[data-cart='total']").html(formatNumber(total));
+    $("[data-cart='count']").html(count);
+    if (cart.length == 0) {
         list.append('<tr><td colspan="5" class="text-center">Không có sản phẩm nào trong giỏ hàng</td></tr>');
         $(".btn-checkout").addClass("d-none");
     } else {
@@ -56,23 +64,23 @@ $("[data-cart='add']").on("click", function(e) {
 
     $.post('/gio-hang/them', {
         _token: csrf_token,
-        id: id
+        product_id: id
     }, function(data, status) {
         if (status == 'success' && data.status != 'error') {
-            load(data);
+            loadCart();
         }
     });
 });
 
-function removeCart(e, id) {
+function removeCart(e, product_id) {
     let t = $(e);
 
     let cur_html = t.html();
 
 
-    $.get('/gio-hang/xoa', { id: id }, function(data, status) {
+    $.get('/gio-hang/xoa', { product_id }, function(data, status) {
         if (status == 'success' && data.status != 'error') {
-            load(data);
+            loadCart();
         }
         t.html(cur_html);
     });
@@ -86,13 +94,12 @@ function quickView(form) {
 
     $.post('/gio-hang/them', {
         _token: csrf_token,
-        id: id,
+        product_id: id,
         quantity: quantity
     }, function(data, status) {
         if (status == 'success' && data.status != 'error') {
-            load(data);
+            loadCart();
         }
-
     });
     return false;
 }

@@ -16,9 +16,10 @@ class CheckLogin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->role == 0) {
-            return redirect()->route('home.index');
+        if (!Auth::guard('customer')->check()) {
+            return response()->json(['error' => 'Chưa đăng nhập'], 401);
         }
         return $next($request);
     }
+
 }
