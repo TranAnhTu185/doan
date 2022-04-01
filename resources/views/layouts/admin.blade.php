@@ -220,17 +220,7 @@
                         <i class="fa fa-cogs menu-icon fa-spin"></i>
                         <span class="menu-title">Cài Đặt</span>
                         <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="settings">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link"
-                                                     href="{{ route('admin.contact') }}">Thông tin cửa hàng</a>
-                            </li>
-                            <li class="nav-item"> <a class="nav-link"
-                                                     href="{{ route('admin.slide') }}">SlideShow</a>
-                            </li>
-                        </ul>
-                    </div>
+                   </a>
                 </li>
             </ul>
         </nav>
@@ -240,9 +230,10 @@
         <!-- partial:partials/_footer.html -->
             <footer class="footer">
                 <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © @php
-                                echo date('Y') @endphp <a href="https://www.facebook.com/profile.php?id=100009879136629"
-                                                          target="_blank">Xuân Vũ</a>. All rights reserved.</span>
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
+                            Copyright © @php echo date('Y') @endphp
+                            <a href="https://www.facebook.com/Shopbook.vn" target="_blank">ShopBook</a>. All rights reserved.
+                        </span>
                     <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made
                             with <i class="mdi mdi-heart text-danger"></i></span>
                 </div>

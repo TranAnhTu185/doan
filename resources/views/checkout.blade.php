@@ -140,22 +140,6 @@
                                             @endif
                                         </div>
                                     @endforeach
-                                    {{-- <div class="panel panel-default">
-                                        <div class="ship-different-title">
-                                            <h5>
-                                                <label id="payment-2">Thanh toán online</label>
-                                                <input type="radio" name="payments" value="1">
-                                            </h5>
-                                        </div>
-                                        <div id="box-payment-2" class="row" style="display:none">
-                                            <div class="col-md-12">
-                                                <div class="coupon-info">
-                                                    <p class="coupon-text">Khách hàng vui lòng thanh toán vào
-                                                        STK:686868686868686868</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                                 <div class="order-button-payment">
                                     <input type="submit" value="đặt hàng">

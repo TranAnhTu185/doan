@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>@isset($contact->name){{ $contact->name }} |@endisset @yield('title')</title>
+    <title>ShopBook</title>
     <meta name="_token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -46,18 +46,16 @@
                     </div>
                     <div class="col-lg-7 col-md-7 col-5">
                         <div class="logo-menu-wrapper text-center">
-                            @isset($contact->logo)
                                 <div class="logo pr-100">
                                     <a href="{{ route('home.index') }}"><img
-                                            src="{{ asset('backend/images/logo/'.$contact->logo) }}"
+                                            src="{{ asset('backend/images/logo/1648230123-images.png') }}"
                                             alt=""></a>
                                 </div>
                                 <div class="sticky-logo pr-100">
                                     <a href="{{ route('home.index') }}"><img
-                                            src="{{ asset('backend/images/logo/'.$contact->logo) }}"
+                                            src="{{ asset('backend/images/logo/1648230123-images.png') }}"
                                             alt="" style="width:75px;"></a>
                                 </div>
-                            @endisset
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-7">
@@ -162,16 +160,18 @@
                 </ul>
             </nav>
         </div>
-        @isset($contact->facebook)
             <div class="follow-area mt-3">
                 <h4 class="newsletter-title">Follow Us</h4>
                 <div class="follow-icon">
                     <ul>
-                        <li class="facebook"><a href="{{ $contact->facebook }}"><i class="ion-social-facebook"></i></a></li>
+                        <li class="facebook">
+                            <a href="https://www.facebook.com/Shopbook.vn">
+                                <i class="ion-social-facebook"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
-        @endisset
     </div>
     <!-- sidebar-cart start -->
     <div class="sidebar-cart onepage-sidebar-area">
@@ -224,31 +224,26 @@
     <footer class="theme-bg footer-padding">
         <div class="container-fluid">
             <div class="footer-top pt-85 pb-25">
-                @isset($contact)
                     <div class="row">
                         <div class="col-3">
                             <div class="footer-widget mb-30">
                                 <div class="footer-widget-title">
-                                    <img src="{{ asset('backend/images/logo/'.$contact->logo) }}" style="width:75px" alt="">
+                                    <img src="{{ asset('backend/images/logo/1648230123-images.png') }}" style="width:75px" alt="">
                                 </div>
                                 <div class="food-info-wrapper">
-                                    @if ($contact->description != null)
                                         <div class="food-address">
                                             <div class="food-info-content">
-                                                <p>{{ $contact->description }}</p>
+                                                <p>ShopBook chuyên phân phối cung cấp sách</p>
                                             </div>
                                         </div>
-                                    @endif
-                                    @if ($contact->facebook != null)
                                         <div class="single-twitter">
                                             <div class="twitter-icon">
                                                 <i class="ion-social-facebook-outline"></i>
                                             </div>
                                             <div class="twitter-content">
-                                                <p><a href="{{ $contact->facebook }}">Page Shop</a></p>
+                                                <p><a href="https://www.facebook.com/Shopbook.vn">Page Shop</a></p>
                                             </div>
                                         </div>
-                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -262,7 +257,6 @@
                                     <ul class="quick-link">
                                         <li><a href="{{ route('home.login') }}">Đăng nhập</a></li>
                                         <li><a href="{{ route('home.login') }}">Đăng ký</a></li>
-                                        <li><a href="{{ route('home.login') }}">Lịch sử mua hàng</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -274,59 +268,49 @@
                                     <h3>Liên hệ</h3>
                                 </div>
                                 <div class="food-info-wrapper">
-                                    @if ($contact->address != null)
-                                        <div class="food-address">
-                                            <div class="food-info-icon">
-                                                <i class="ion-ios-home-outline"></i>
-                                            </div>
-                                            <div class="food-info-content">
-                                                <p>{{ $contact->address }}</p>
-                                            </div>
+                                    <div class="food-address">
+                                        <div class="food-info-icon">
+                                            <i class="ion-ios-home-outline"></i>
                                         </div>
-                                    @endif
-                                    <div class="food-address">
-                                        @if ($contact->phone != null)
-                                            <div class="food-info-icon">
-                                                <i class="ion-ios-telephone-outline"></i>
-                                            </div>
-                                            <div class="food-info-content">
-                                                <p>{{ $contact->phone }}</p>
-                                            </div>
-                                        @endif
+                                        <div class="food-info-content">
+                                            <p>Hà Nội</p>
+                                        </div>
                                     </div>
                                     <div class="food-address">
-                                        @if ($contact->phone_other != null)
-                                            <div class="food-info-icon">
-                                                <i class="ti-mobile"></i>
-                                            </div>
-                                            <div class="food-info-content">
-                                                <p>{{ $contact->phone_other }}</p>
-                                            </div>
-                                        @endif
+                                        <div class="food-info-icon">
+                                            <i class="ion-ios-telephone-outline"></i>
+                                        </div>
+                                        <div class="food-info-content">
+                                            <p>0977902031</p>
+                                        </div>
                                     </div>
                                     <div class="food-address">
-                                        @if($contact->email != null)
-                                            <div class="food-info-icon">
-                                                <i class="ion-ios-email-outline"></i>
-                                            </div>
-                                            <div class="food-info-content">
-                                                <p><a href="#">{{ $contact->email }}</a></p>
-                                            </div>
-                                        @endif
+                                        <div class="food-info-icon">
+                                            <i class="ti-mobile"></i>
+                                        </div>
+                                        <div class="food-info-content">
+                                            <p>0123456789</p>
+                                        </div>
+                                    </div>
+                                    <div class="food-address">
+                                        <div class="food-info-icon">
+                                            <i class="ion-ios-email-outline"></i>
+                                        </div>
+                                        <div class="food-info-content">
+                                            <p><a href="#">anhtu185ww@gmail.com</a></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endisset
             </div>
             <div class="footer-bottom border-top-1 ptb-15">
                 <div class="row">
                     <div class="col-md-6 col-12">
                         <div class="copyright-payment">
                             <div class="copyright">
-                                <p>Copyright © @php echo date('Y') @endphp <a
-                                        href="https://www.facebook.com/profile.php?id=100009879136629&ref=bookmarks">
+                                <p>Copyright © @php echo date('Y') @endphp
                             </div>
                         </div>
                     </div>

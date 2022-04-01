@@ -10,7 +10,6 @@ use App\BillDetail;
 use App\Bill;
 use App\Cart;
 use App\SlideShow;
-use App\Contact;
 use App\PaymentStatus;
 use Illuminate\Support\Facades\Auth;
 
@@ -163,7 +162,6 @@ class HomeController extends Controller
 
     public function contact()
     {
-        $contact = Contact::first();
-        return view('contact')->with('contact', $contact);
+        return view('contact');
     }
 }

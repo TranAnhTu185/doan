@@ -18,8 +18,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-7 ml-auto mr-auto">
-                <h2 class="text-center text-uppercase">@isset($contact->name){{ $contact->name }}@endisset</h2>
-                @isset($contact->note){!! $contact->note !!}@endisset
+                <h2 class="text-center text-uppercase">ShopBook</h2>
+                <p>
+                    <strong>ShopBook chuyên phân phối các loại sách lớn nhất Việt Nam</strong>
+                </p>
+                <p>Số điện thoại: 0977902031</p>
+                <p>Hotline: 0123456789</p>
+                <p>Email: nokshi@gmail.com</p>
+                <p>Địa chỉ: Hà Nội</p>
             </div>
         </div>
     </div>

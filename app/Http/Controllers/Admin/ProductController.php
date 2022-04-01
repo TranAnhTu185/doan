@@ -180,6 +180,6 @@ class ProductController extends Controller
     {
         $comment = Comments::find($id);
         $comment->delete();
-        return  redirect()->route('admin.comment')->with('success', 'Deletecomment success');
+        return  redirect()->route('admin.comment', $comment->product_id)->with('success', 'Deletecomment success');
     }
 }

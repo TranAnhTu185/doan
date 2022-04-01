@@ -29,8 +29,7 @@ class AppServiceProvider extends ServiceProvider
         //Menu Product
         view()->composer('layouts.home', function ($view){
             $categories = Category::all()->where('parent_id', 0)->sortBy('sort_order');
-            $contact = Contact::first();
-            $view->with(['categories' => $categories, 'contact' => $contact]);
+            $view->with(['categories' => $categories]);
         });
 
         view()->composer('layouts.admin', function ($view){

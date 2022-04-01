@@ -111,28 +111,13 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('destroy/{id}', 'Admin\UserController@destroy')->name('admin.user.destroy');
         });
 
-        //catagory
+        //category
         Route::group(['prefix' => 'category'], function () {
             Route::get('/', 'Admin\CategoryController@index')->name('admin.category');
             Route::post('store', 'Admin\CategoryController@store')->name('admin.category.store');
             Route::get('edit/{id}', 'Admin\CategoryController@edit')->name('admin.category.edit');
             Route::post('update/{id}', 'Admin\CategoryController@update')->name('admin.category.update');
             Route::get('destroy/{id}', 'Admin\CategoryController@destroy')->name('admin.category.destroy');
-        });
-
-        //slideshow
-        Route::group(['prefix' => 'slide'], function () {
-            Route::get('/', 'Admin\SettingController@slideshow')->name('admin.slide');
-            Route::post('store', 'Admin\SettingController@storeSlide')->name('admin.slide.store');
-            Route::get('destroy/{id}', 'Admin\SettingController@destroySlide')->name('admin.slide.destroy');
-        });
-
-        //contact
-        Route::group(['prefix' => 'contact'], function () {
-            Route::get('/', 'Admin\SettingController@contact')->name('admin.contact');
-            Route::post('store', 'Admin\SettingController@storeContact')->name('admin.contact.store');
-            Route::post('create', 'Admin\SettingController@createContact')->name('admin.contact.create');
-            Route::post('update/{id}', 'Admin\SettingController@updateContact')->name('admin.contact.update');
         });
     });
 });
