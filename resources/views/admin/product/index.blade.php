@@ -69,7 +69,7 @@ Sản phẩm
                                                         <div class="nav-item dropdown">
                                                             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                                                                data-toggle="dropdown">
-                                                                <i class="fa fa-bars"></i>
+                                                                <i class="fa fa-sliders"></i>
                                                             </a>
                                                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                                                                  aria-labelledby="notificationDropdown">
