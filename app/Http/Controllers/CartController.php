@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Cart;
@@ -12,8 +13,11 @@ class CartController extends Controller
 {
 
     public function getCart() {
-        $carts = Cart::where('customer_id', Auth::guard('customer')->user()->id)->with('product', 'product.product_image')->get();
-        return response()->json($carts);
+        if (Auth::guard('customer')->check()) {
+            $carts = Cart::where('customer_id', Auth::guard('customer')->user()->id)->with('product')->get();
+            return response()->json($carts);
+        }
+        return response()->json([]);
     }
 
     public function addCart(Request $request) {
@@ -42,7 +46,7 @@ class CartController extends Controller
     }
 
     public function viewCart() {
-        $carts = Cart::where('customer_id', Auth::guard('customer')->user()->id)->with('product', 'product.product_image')->get();
+        $carts = Cart::where('customer_id', Auth::guard('customer')->user()->id)->with('product')->get();
         return view('cart')->with(['cart' => $carts]);
     }
 }

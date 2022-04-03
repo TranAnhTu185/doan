@@ -19,7 +19,9 @@ class CreateBillsTable extends Migration
             $table->dateTime('created');
             $table->tinyInteger('payments')->nullable;
             $table->tinyInteger('status');
-
+            $table->string('name');
+            $table->integer('phone');
+            $table->string('address');
             $table->foreign('customer_id')->references('id')
                 ->on('customers')
                 ->onDelete('cascade');

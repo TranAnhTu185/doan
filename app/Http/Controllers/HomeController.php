@@ -28,10 +28,7 @@ class HomeController extends Controller
         $product_limited = Product::all()->where('status', '==', 1)->sortByDesc('quantity')->take(8);
         $product_featured = Product::all()->where('status', '==', 1)->sortByDesc('prince')->take(8);
         $product_new = Product::all()->where('status', '==', 1)->sortDesc()->take(8);
-        $slideshow = Slideshow::all();
-        $banner1 = Category::all()->where('avatar', '!=', null)->sortBy('sort_order')->take(2);
-        $banner2 = Category::all()->where('avatar', '!=', null)->sortByDesc('sort_order')->take(2);
-        return view('index')->with(['banner1' => $banner1, 'banner2' => $banner2, 'product_sale' => $product_sale, 'product_limited' => $product_limited, 'product_featured' => $product_featured, 'product_new' => $product_new, 'slideShow' => $slideshow]);
+        return view('index')->with(['product_sale' => $product_sale, 'product_limited' => $product_limited, 'product_featured' => $product_featured, 'product_new' => $product_new]);
     }
 
     public function getList($id, $name){
@@ -55,7 +52,7 @@ class HomeController extends Controller
     {
         $product = Product::find($request->id);
         $product->newPrice = $product->newPrice();
-        $product->image = $product->product_image[0]->name;
+        $product->image = $product->image;
         return response()->json($product);
     }
 
@@ -65,8 +62,7 @@ class HomeController extends Controller
         if (!Cart::get('id')){
             return redirect()->route('home.index');
         }
-        $payment_status = PaymentStatus::all();
-        return view('checkout')->with('payment_status', $payment_status);
+        return view('checkout');
     }
 
     public function storeBill(Request $request){
@@ -80,8 +76,7 @@ class HomeController extends Controller
         $bill = new Bill();
         $bill->customer_id = $userId;
         $bill->created = date('Y-m-d H:i:s');
-        $bill->payment_id = $request->payment_id;
-        $bill->note = $request->note;
+        $bill->payments = $request->payments;
         $bill->status = 0;
         $bill->name = $request->name;
         $bill->phone = $request->phone;
@@ -134,7 +129,7 @@ class HomeController extends Controller
         $request->validate([
             'name' => 'required|min:2|max:100',
             'phone' => 'required|min:10|max:10',
-            'address' => 'required|min:2|max:255',
+            'address' => 'required|min:10|max:255',
             'email' => 'required|email|unique:customers',
             'password' => 'required|min:8|max:50',
             'password_confirmation' => 'required|min:8|max:50|same:password',
@@ -147,7 +142,7 @@ class HomeController extends Controller
         $customer->email = $request->email;
         $customer->password = bcrypt($request->password);
         $customer->save();
-        return redirect()->route('home.login')->with('success', 'Tạo tài khoản thành công.');
+        return redirect()->route('home.login', '#lg2')->with('success', 'Tạo tài khoản thành công.');
     }
 
     //search
@@ -156,7 +151,9 @@ class HomeController extends Controller
         $key = $request->key;
         $list = Product::where('name', 'like', "%$key%")
             ->orWhere('price', 'like', "%$key%")
-            ->orWhere('description', 'like', "%$key%")->take(30)->paginate(5);
+            ->orWhere('description', 'like', "%$key%")
+            ->orWhere('NXB', 'like', "%$key%")
+            ->orWhere('NamXB', $key)->take(30)->paginate(5);
         return view('search')->with(['key' => $key, 'list' => $list]);
     }
 

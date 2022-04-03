@@ -9,12 +9,7 @@ class Product extends Model
 {
     //Product model
     protected $table = 'products';
-    protected $fillable = ['name', 'quantity', 'image', 'price', 'sale', 'description', 'content', 'status', 'category_id'];
-
-    public function product_image()
-    {
-        return $this->hasMany('App\Image', 'product_id', 'id');
-    }
+    protected $fillable = ['name', 'quantity', 'NXB', 'NamXB', 'price', 'sale', 'status', 'description', 'content', 'image', 'category_id'];
 
     public function getUrl(){
         return Str::of(strtolower($this->name))->slug('-');

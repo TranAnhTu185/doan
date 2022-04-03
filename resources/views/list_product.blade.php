@@ -77,7 +77,7 @@
                                 <div class="product-wrapper mb-35">
                                     <div class="product-img">
                                         <a href="{{ route('home.detail', [$item->id, $item->getUrl()]) }}">
-                                            <img src="{{ asset('backend/images/product/'.$item->product_image[0]->name) }}"
+                                            <img src="{{ asset('backend/images/product/'.$item->image) }}"
                                                 alt="">
                                         </a>
                                         @if($item->sale > 0)

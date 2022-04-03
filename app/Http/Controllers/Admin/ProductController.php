@@ -49,8 +49,10 @@ class ProductController extends Controller
             'name' => 'required|min:5|max:150|unique:products',
             'price' => 'required|integer|min:1000',
             'quantity' => 'required|integer|min:1',
+            'NamXB' => 'required|integer|min:4',
+            'NXB' => 'required|min:8',
             'sale' => 'min:0',
-            'image.*' => 'image',
+            'image' => 'image',
         ]);
 
         $product = new Product();
@@ -58,24 +60,22 @@ class ProductController extends Controller
         $product->quantity = $request->quantity;
         $product->price = $request->price;
         $product->sale = $request->sale;
+        $product->NamXB = $request->NamXB;
+        $product->NXB = $request->NXB;
         $product->description = $request->description;
-        $product->content = $request->get('content');;
+        $product->content = $request->get('content');
         $product->category_id = $request->category_id;
         $product->status = $request->status;
+
+        $file = $request->file('image');
+        if ($request->hasFile('image')) {
+            $img_name = $file->getClientOriginalName();
+            $image = time() . '-' . $img_name;
+            Storage::disk('storage')->putFileAs("product", $file, $image);
+            $product->image = $image;
+        }
         $product->save();
 
-        $images = $request->image;
-        if ($request->hasFile('image')) {
-            foreach ($images as $img) {
-                $image = new Image();
-                $image->product_id = $product->id;
-                $img_name = $img->getClientOriginalName();
-                $image_name = time() . '-' . $img_name;
-                Storage::disk('storage')->putFileAs("product", $img, $image_name);
-                $image->name = $image_name;
-                $image->save();
-            }
-        }
         return redirect()->route('admin.product')->with('success', 'create success!');
     }
 
@@ -119,8 +119,10 @@ class ProductController extends Controller
             'name' => 'required|min:5|max:150',
             'price' => 'required|integer|min:1000',
             'quantity' => 'required|integer|min:1',
+            'NamXB' => 'required|integer|min:4',
+            'NXB' => 'required|min:10',
             'sale' => 'min:0',
-            'image.*' => 'image',
+            'image' => 'image',
         ]);
 
         $product = Product::find($id);
@@ -130,27 +132,21 @@ class ProductController extends Controller
         $product->sale = $request->sale;
         $product->description = $request->description;
         $product->content = $request->get('content');
+        $product->NXB = $request->NXB;
+        $product->NamXB = $request->NamXB;
         $product->category_id = $request->category_id;
         $product->status = $request->status;
+
+        $file = $request->file('image');
+        if ($request->hasFile('image')) {
+            $img_name = $file->getClientOriginalName();
+            $image = time() . '-' . $img_name;
+            Storage::disk('storage')->putFileAs("product", $file, $image);
+            $product->image = $image;
+        }
+
         $product->save();
 
-        $images = $request->image;
-        if ($request->hasFile('image')) {
-            foreach ($product->product_image as $image) {
-                Storage::disk('storage')->delete("product/$image->name");
-            }
-
-            Image::where('product_id', $id)->delete();
-            foreach ($images as $img) {
-                $image = new Image();
-                $image->product_id = $product->id;
-                $img_name = $img->getClientOriginalName();
-                $image_name = time() . '-' . $img_name;
-                Storage::disk('storage')->putFileAs("product", $img, $image_name);
-                $image->name = $image_name;
-                $image->save();
-            }
-        }
         return redirect()->route('admin.product')->with('success', 'Update success!');
     }
 

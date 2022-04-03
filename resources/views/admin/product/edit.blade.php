@@ -61,6 +61,19 @@ Cập nhật sản phẩm
                                         value="{{ $product->sale }}" required>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>Nhà Xuất Bản (<span style="color:red">*</span>)</label>
+                                    <input class="form-control" name="NXB" type="text"
+                                           value="{{ $product->NXB }}" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Năm Xuất Bản (<span style="color:red">*</span>)</label>
+                                    <input class="form-control" name="NamXB" type="number"
+                                           value="{{ $product->NamXB }}" required>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label>Mô tả</label>
                                 <textarea class="form-control" id="description"
@@ -91,16 +104,14 @@ Cập nhật sản phẩm
                             <div class="form-group">
                                 <label>Ảnh (Không thao tác nếu không thay đổi)</label>
                                 <div class="row mb-2 ml-1">
-                                    @foreach ($product->product_image as $item)
                                     <div class="remove-image" data-role="removeImage">
-                                        <img src="{{ asset('backend/images/product/'.$item->name) }}">
+                                        <img src="{{ asset('backend/images/product/'.$product->image) }}">
                                         <div class="remove"><i class="fa fa-trash"></i></div>
-                                        <input type="hidden" name="remove[]" value="{{ $item->id }}" disabled>
+                                        <input type="hidden" name="remove" value="{{ $product->id }}" disabled>
                                     </div>
-                                    @endforeach
                                 </div>
                                 <div class="row mt-3 ml-1">
-                                    <input type="file" class="form-control" name="image[]" accept="image/*" data-role="preview-image" multiple>
+                                    <input type="file" class="form-control" name="image" accept="image" data-role="preview-image">
                                     <div id="preview-image"></div>
                                 </div>
                             </div>

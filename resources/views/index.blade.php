@@ -3,30 +3,6 @@
     Trang chủ
 @endsection
 @section('content')
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-12">
-                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
-                    <div class="carousel-inner">
-                        @foreach($slideShow as $item)
-                            <div class="carousel-item {{ $item == $slideShow[0] ? 'active' : '' }}">
-                                <img src=" {{ asset('backend/images/carousel/'.$item->name) }}"
-                                     class="d-block w-100" alt="...">
-                            </div>
-                        @endforeach
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="product-area mt-5 product-padding">
         <div class="container-fluid">
             <div class="section-title-2 text-center mb-25">
@@ -51,7 +27,7 @@
                                 <div class="product-wrapper mb-35">
                                     <div class="product-img">
                                         <a href="{{ route('home.detail', [$item->id, $item->getUrl()]) }}">
-                                            <img src="{{ asset('backend/images/product/'. $item->product_image[0]->name) }}"
+                                            <img src="{{ asset('backend/images/product/'. $item->image) }}"
                                                  alt="">
                                             @if($item->sale > 0)
                                                 <div class="price-decrease">
@@ -91,7 +67,7 @@
                                 <div class="product-wrapper mb-35">
                                     <div class="product-img">
                                         <a href="{{ route('home.detail', [$item->id, $item->getUrl()]) }}">
-                                            <img src="{{ asset('backend/images/product/'. $item->product_image[0]->name) }}"
+                                            <img src="{{ asset('backend/images/product/'. $item->image) }}"
                                                  alt="">
                                             @if($item->sale > 0)
                                                 <div class="price-decrease">
@@ -131,7 +107,7 @@
                                 <div class="product-wrapper mb-35">
                                     <div class="product-img">
                                         <a href="{{ route('home.detail', [$item->id, $item->getUrl()]) }}">
-                                            <img src="{{ asset('backend/images/product/'. $item->product_image[0]->name) }}"
+                                            <img src="{{ asset('backend/images/product/'. $item->image) }}"
                                                  alt="">
                                             <div class="price-decrease">
                                                 <span>{{ $item->sale }}% off</span>
@@ -177,7 +153,7 @@
                         <div class="product-wrapper mb-35">
                             <div class="product-img">
                                 <a href="{{ route('home.detail', [$item->id, $item->getUrl()]) }}">
-                                    <img src="{{ asset('backend/images/product/'. $item->product_image[0]->name) }}"
+                                    <img src="{{ asset('backend/images/product/'. $item->image) }}"
                                          alt="">
                                     @if ($item->sale > 0)
                                         <div class="price-decrease">

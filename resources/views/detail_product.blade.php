@@ -26,29 +26,13 @@
                 <div class="product-details-img-content">
                     <div class="product-details-tab mr-40">
                         <div class="product-details-large tab-content">
-                            @foreach($product->product_image as $item)
-                                <div class="tab-pane {{ $item == $product->product_image[0] ? 'active' : '' }}"
-                                    id="{{ $item->id }}">
-                                    <div class="easyzoom easyzoom--overlay">
-                                        <a
-                                            href="{{ asset('backend/images/product/'.$item->name) }}">
-                                            <img src="{{ asset('backend/images/product/'.$item->name) }}"
-                                                alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="product-details-small nav mt-12 product-dec-slider owl-carousel w-400px">
-                            @if($product->product_image->count() > 1)
-                                @foreach($product->product_image as $item)
-                                    <a class="{{ $item == $product->product_image[0] ? 'active' : '' }}"
-                                        href="#{{ $item->id }}">
-                                        <img src="{{ asset('backend/images/product/'.$item->name) }}"
-                                            alt="">
-                                    </a>
-                                @endforeach
-                            @endif
+                            <div class="easyzoom easyzoom--overlay">
+                                <a
+                                    href="{{ asset('backend/images/product/'.$product->image) }}">
+                                    <img src="{{ asset('backend/images/product/'.$product->image) }}"
+                                        alt="">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,9 +78,6 @@
                     </div>
                 </div>
             </div>
-{{--            <div class="col-12 mx-auto mt-3">--}}
-{{--                <p>{!! $product->content !!}</p>--}}
-{{--            </div>--}}
         </div>
     </div>
 </div>
@@ -112,7 +93,7 @@
                         <div class="product-wrapper mb-35">
                             <div class="product-img">
                                 <a href="{{ route('home.detail', [$item->id, $item->getUrl()]) }}">
-                                    <img src="{{ asset('backend/images/product/'. $item->product_image[0]->name) }}"
+                                    <img src="{{ asset('backend/images/product/'. $item->image) }}"
                                         alt="">
                                     @if ($item->sale > 0)
                                     <div class="price-decrease">

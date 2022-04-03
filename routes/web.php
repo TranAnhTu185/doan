@@ -22,7 +22,7 @@ Route::get('chi-tiet/{id}-{name}.html', 'HomeController@getDetail')->name('home.
 Route::get('xem-nhanh', 'HomeController@quickView')->name('home.quickview');
 //cart
 Route::group(['prefix' => 'gio-hang'], function () {
-        Route::get('hien-thi','CartController@getCart')->name('home.cart.get')->middleware('customer');
+        Route::get('hien-thi','CartController@getCart')->name('home.cart.get');
         Route::post('them', 'CartController@addCart')->name('home.cart.add')->middleware('customer');
         Route::get('xoa', 'CartController@removeInCart')->name('home.cart.delete')->middleware('customer');
         Route::get('/', 'CartController@viewCart')->name('home.cart')->middleware('customer');
@@ -64,60 +64,15 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('comment/{id}', 'Admin\ProductController@showComment')->name('admin.comment');
             Route::get('comment/delete/{id}', 'Admin\ProductController@deleteCommentProduct')->name('admin.comment.delete');
         });
-
-
-        //customer
-        Route::group(['prefix' => 'customer'], function () {
-            Route::get('/', 'Admin\CustomerController@index')->name('admin.customer');
-            Route::get('create', 'Admin\CustomerController@create')->name('admin.customer.create');
-            Route::post('store', 'Admin\CustomerController@store')->name('admin.customer.store');
-            Route::get('edit/{id}', 'Admin\CustomerController@edit')->name('admin.customer.edit');
-            Route::post('update/{id}', 'Admin\CustomerController@update')->name('admin.customer.update');
-            Route::get('show/{id}', 'Admin\CustomerController@show')->name('admin.customer.show');
-            Route::get('destroy/{id}', 'Admin\CustomerController@destroy')->name('admin.customer.destroy');
-        });
-
-        //bill
-        Route::group(['prefix' => 'bill'], function () {
-            Route::get('/','Admin\BillController@index')->name('admin.bill');
-            Route::get('/new','Admin\BillController@newBill')->name('admin.bill.new');
-            Route::get('create', 'Admin\BillController@create')->name('admin.bill.create');
-            Route::post('store', 'Admin\BillController@store')->name('admin.bill.store');
-            Route::get('edit/{id}', 'Admin\BillController@edit')->name('admin.bill.edit');
-            Route::post('update/{id}', 'Admin\BillController@update')->name('admin.bill.update');
-            Route::get('show/{id}', 'Admin\BillController@show')->name('admin.bill.show');
-            Route::get('destroy/{id}', 'Admin\BillController@destroy')->name('admin.bill.destroy');
-            Route::get('delete', 'Admin\BillController@delete')->name('admin.bill.delete');
-            Route::get('search', 'Admin\BillController@searchProduct')->name('admin.bill.search');
-            Route::get('select', 'Admin\BillController@selectProduct')->name('admin.bill.select');
-            Route::post('add', 'Admin\BillController@addProduct')->name('admin.bill.add');
-            Route::get('search-customer', 'Admin\BillController@searchCustomer')->name('admin.bill.search-customer');
-            Route::get('select-customer', 'Admin\BillController@selectCustomer')->name('admin.bill.select-customer');
-            Route::get('payment', 'Admin\BillController@getPayment')->name('admin.bill.payment');
-            Route::post('add-payment', 'Admin\BillController@addPayment')->name('admin.bill.add-payment');
-            Route::get('edit-payment/{id}', 'Admin\BillController@editPayment')->name('admin.bill.edit-payment');
-            Route::post('update-payment', 'Admin\BillController@updatePayment')->name('admin.bill.update-payment');
-            Route::get('delete-payment/{id}', 'Admin\BillController@deletePayment')->name('admin.bill.delete-payment');
-        });
-
         //user
-        Route::group(['prefix' => 'user'], function () {
-            Route::get('/', 'Admin\UserController@index')->name('admin.user');
-            Route::get('create', 'Admin\UserController@create')->name('admin.user.create');
-            Route::post('store', 'Admin\UserController@store')->name('admin.user.store');
-            Route::get('edit/{id}', 'Admin\UserController@edit')->name('admin.user.edit');
-            Route::post('update/{id}', 'Admin\UserController@update')->name('admin.user.update');
-            Route::get('show/{id}', 'Admin\UserController@show')->name('admin.user.show');
-            Route::get('destroy/{id}', 'Admin\UserController@destroy')->name('admin.user.destroy');
-        });
-
-        //category
-        Route::group(['prefix' => 'category'], function () {
-            Route::get('/', 'Admin\CategoryController@index')->name('admin.category');
-            Route::post('store', 'Admin\CategoryController@store')->name('admin.category.store');
-            Route::get('edit/{id}', 'Admin\CategoryController@edit')->name('admin.category.edit');
-            Route::post('update/{id}', 'Admin\CategoryController@update')->name('admin.category.update');
-            Route::get('destroy/{id}', 'Admin\CategoryController@destroy')->name('admin.category.destroy');
-        });
+//        Route::group(['prefix' => 'user'], function () {
+//            Route::get('/', 'Admin\UserController@index')->name('admin.user');
+//            Route::get('create', 'Admin\UserController@create')->name('admin.user.create');
+//            Route::post('store', 'Admin\UserController@store')->name('admin.user.store');
+//            Route::get('edit/{id}', 'Admin\UserController@edit')->name('admin.user.edit');
+//            Route::post('update/{id}', 'Admin\UserController@update')->name('admin.user.update');
+//            Route::get('show/{id}', 'Admin\UserController@show')->name('admin.user.show');
+//            Route::get('destroy/{id}', 'Admin\UserController@destroy')->name('admin.user.destroy');
+//        });
     });
 });

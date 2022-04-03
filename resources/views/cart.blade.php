@@ -78,7 +78,7 @@ Giỏ hàng
             total += prod.quantity * prod.product.price;
             list.append('<tr>\
                             <td class="product-thumbnail">\
-                                <a href="#"><img src="'+ '/backend/images/product/' + prod.product.product_image[0].name+'" alt=""></a>\
+                                <a href="#"><img src="'+ '/backend/images/product/' + prod.product.image+'" alt=""></a>\
                             </td>\
                             <td class="product-name">\
                                 <a href="' + prod.link + '">' + prod.product.name + '</a>\

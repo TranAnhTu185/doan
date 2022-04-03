@@ -48,9 +48,9 @@ Sản phẩm
                                                     <td>{{ $i++ }}</td>
                                                     <td>{{ $product->name }}</td>
                                                     <td>
-                                                        @if (count($product->product_image) > 0 )
+                                                        @if ($product->image)
                                                             <img
-                                                                src="{{ asset('backend/images/product/'.$product->product_image[0]->name) }}">
+                                                                src="{{ asset('backend/images/product/'.$product->image) }}">
                                                         @endif
                                                     </td>
                                                     <td>{{ $product->quantity }}</td>

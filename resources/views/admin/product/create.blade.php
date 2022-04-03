@@ -65,6 +65,24 @@ Thêm mới sản phẩm
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>Nhà Xuất bản</label>
+                                    <input class="form-control" name="NXB" type="text"
+                                           placeholder="Enter NXB" required>
+                                    @error('NXB')
+                                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Năm Xuất bản</label>
+                                    <input class="form-control" name="NamXB" type="number" placeholder="Enter year created">
+                                    @error('sale')
+                                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label>Mô tả</label>
                                 <textarea id="editor1" class="form-control" cols="80" rows="10"
@@ -95,8 +113,8 @@ Thêm mới sản phẩm
                             </div>
                             <div class="form-group">
                                 <label>Ảnh</label>
-                                <input type="file" class="form-control" name="image[]" data-role="preview-image"
-                                    multiple>
+                                <input type="file" class="form-control" name="image" data-role="preview-image"
+                                    >
                                 @error('image')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

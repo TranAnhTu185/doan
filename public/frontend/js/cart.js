@@ -15,6 +15,7 @@ function formatNumber(nStr, decSeperate = ",", groupSeperate = ",") {
 function loadCart() {
     $.get('/gio-hang/hien-thi', function(data, status) {
         if (status == 'success') load(data);
+        console.log(data)
     });
 }
 loadCart();
@@ -29,10 +30,9 @@ function load(cart) {
         $.each(cart, function(id, prod) {
             count += prod.quantity;
             total += prod.quantity * prod.product.price;
-            // console.log(prod)
             list.append('<li class="single-product-cart">\
         <div class="cart-img">\
-            <a href="#"><img src="'+ '/backend/images/product/' + prod.product.product_image[0].name+'" alt=""></a>\
+            <a href="#"><img src="'+ '/backend/images/product/' + prod.product.image+'" alt=""></a>\
         </div>\
         <div class="cart-title">\
             <h3><a href="'+prod.link+'"> '+prod.product.name+'</a></h3>\
@@ -68,6 +68,11 @@ $("[data-cart='add']").on("click", function(e) {
     }, function(data, status) {
         if (status == 'success' && data.status != 'error') {
             loadCart();
+        }
+        // if(status == 401 &&)
+    }).fail(function (e) {
+        if (e.status == 401) {
+            location.replace('/dang-nhap.html')
         }
     });
 });

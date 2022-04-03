@@ -8,7 +8,7 @@ class Bill extends Model
 {
     //Bill model
     protected $table = 'bills';
-    protected $fillable = ['customer_id', 'created', 'payments', 'status'];
+    protected $fillable = ['customer_id', 'created', 'payments', 'status', 'name', 'phone', 'address'];
 
     public function bill_customer()
     {
@@ -18,10 +18,5 @@ class Bill extends Model
     public function bill_billdetail()
     {
         return $this->hasMany('App\BillDetail', 'bill_id', 'id');
-    }
-
-    public function bill_payment()
-    {
-        return $this->belongsTo('App\PaymentStatus', 'payment_id', 'id');
     }
 }

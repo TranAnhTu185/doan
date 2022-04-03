@@ -9,7 +9,7 @@ class Category extends Model
 {
     //Category model
     protected $table = 'categories';
-    protected $fillable = ['name', 'parent_id', 'sort_order'];
+    protected $fillable = ['name'];
 
     public function getParent(){
         return Category::all()->where('parent_id', $this->id);

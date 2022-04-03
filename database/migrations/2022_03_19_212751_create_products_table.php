@@ -17,11 +17,14 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name', 150)->unique();
             $table->integer('quantity');
+            $table->string('NXB');
+            $table->integer('NamXB');
             $table->bigInteger('price');
             $table->integer('sale')->nullable();
+            $table->integer('status');
             $table->text('description')->nullable();
             $table->text('content')->nullable();
-            $table->tinyInteger('status')->nullable();
+            $table->string('image');
             $table->unsignedInteger('category_id');
 
             $table->foreign('category_id')->references('id')

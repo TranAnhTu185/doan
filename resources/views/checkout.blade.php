@@ -117,29 +117,21 @@
                         <div class="payment-method mt-40">
                             <div class="payment-accordion">
                                 <div class="panel-group" id="faq">
-                                    @php
-                                        $i = 1;
-                                        $j = 1;
-                                    @endphp
-                                    @foreach ($payment_status as $item)
                                         <div class="panel panel-default">
                                             <div class="ship-different-title">
                                                 <h5>
-                                                    <label id="payment-{{ $i++ }}">{{ $item->name }}</label>
-                                                    <input type="radio" name="payment_id" value="{{ $item->id }}" @if($i == 2) checked @endif>
+                                                    <label id="payment">Giao hàng nhận tiền</label>
+                                                    <input type="radio" name="payments" value="1"  checked>
                                                 </h5>
                                             </div>
-                                            @if (isset($item->note))
-                                                <div id="box-payment-{{ $j++ }}" class="row" style="display:none">
+                                                <div id="box-payment" class="row" style="display:none">
                                                     <div class="col-md-12">
                                                         <div class="coupon-info">
-                                                            <p class="coupon-text">{!! $item->note !!}</p>
+                                                            <p class="coupon-text">Khách hàng được kiểm tra trước khi nhận hàng.</p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endif
                                         </div>
-                                    @endforeach
                                 </div>
                                 <div class="order-button-payment">
                                     <input type="submit" value="đặt hàng">
