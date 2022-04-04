@@ -41,8 +41,14 @@
                 <div class="product-details-content">
                     <h2>{{ $product->name }}</h2>
                     <div class="product-price">
-                        <span class="old">{{ number_format($product->price) }}</span>
-                        <span>{{ number_format($product->newPrice()) }}</span>
+                        @if( $product->sale > 0)
+                            <span class="old">{{ number_format($product->price) }}đ</span>
+                            <span>{{ number_format($product->newPrice()) }}đ</span>
+                            <span class="sale">{{ $product->sale }}% Giảm</span>
+                        @endif
+                        @if($product->sale ==0)
+                                <span >{{ number_format($product->price) }}đ</span>
+                        @endif
                     </div>
                     <div class="product-overview">
                         <h5 class="pd-sub-title">Mô Tả</h5>

@@ -15,7 +15,6 @@ function formatNumber(nStr, decSeperate = ",", groupSeperate = ",") {
 function loadCart() {
     $.get('/gio-hang/hien-thi', function(data, status) {
         if (status == 'success') load(data);
-        console.log(data)
     });
 }
 loadCart();

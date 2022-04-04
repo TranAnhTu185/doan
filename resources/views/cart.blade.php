@@ -101,16 +101,16 @@ Giỏ hàng
     }
 
 
-    function changeQty(e, id) {
-        $.get('/gio-hang/sua', {
-            id: id,
-            quantity: e.value
-        }, function (data, status) {
-            console.log(data);
-            if (status == 'success' && data.status != 'error') {
-                load(data);
-            }
-        });
-    }
+    // function changeQty(e, id) {
+    //     $.get('/gio-hang/sua', {
+    //         id: id,
+    //         quantity: e.value
+    //     }, function (data, status) {
+    //         console.log(data);
+    //         if (status == 'success' && data.status != 'error') {
+    //             load(data);
+    //         }
+    //     });
+    // }
 </script>
 @endsection

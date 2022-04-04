@@ -58,7 +58,7 @@
                         <h6 class="p-3 mb-0">Thông báo</h6>
                         @if ($bill > 0)
                             <div class="dropdown-divider"></div>
-                            <a href="{{ route('admin.bill') }}" class="dropdown-item preview-item">
+                            <a href="" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-success">
                                         <i class="mdi mdi-clipboard-text"></i>
@@ -84,21 +84,6 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                          aria-labelledby="notificationDropdown">
-{{--                        <div class="dropdown-divider"></div>--}}
-{{--                        @if (Auth::check())--}}
-{{--                            <a class="dropdown-item preview-item"--}}
-{{--                               href="{{ route('admin.user.edit', Auth::user()->id) }}">--}}
-{{--                                <div class="preview-thumbnail">--}}
-{{--                                    <div class="preview-icon bg-dark">--}}
-{{--                                        <i class="fa fa-pencil"></i>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div--}}
-{{--                                    class="preview-item-content d-flex align-items-start flex-column justify-content-center">--}}
-{{--                                    <h6 class="preview-subject font-weight-normal mb-1">Profile</h6>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        @endif--}}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item preview-item"
                            href="{{ route('admin.logout') }}">
@@ -170,11 +155,6 @@
                                     Sản Phẩm
                                 </a>
                             </li>
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" href="{{ route('admin.category') }}">--}}
-{{--                                    Danh Mục Sản Phẩm--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
                         </ul>
                     </div>
                 </li>
@@ -189,31 +169,8 @@
                             <i class="menu-arrow"></i>
                         @endif
                     </a>
-                    <div class="collapse" id="bill">
-                        <ul class="nav flex-column sub-menu">
-{{--                            <li class="nav-item"> <a class="nav-link"--}}
-{{--                                                     href="{{ route('admin.bill') }}">Đơn Hàng--}}
-{{--                                    @if ($bill > 0)--}}
-{{--                                        <span class="badge badge-gradient-primary badge-pill">{{ $bill }}</span>--}}
-{{--                                    @endif</a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" href="{{ route('admin.customer') }}">Khách--}}
-{{--                                    Hàng</a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" href="{{ route('admin.bill.payment') }}">Phương thức thanh toán</a>--}}
-{{--                            </li>--}}
-                        </ul>
-                    </div>
                 </li>
 
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" href="{{ route('admin.user') }}">--}}
-{{--                        <i class="mdi mdi-account-settings-variant menu-icon"></i>--}}
-{{--                        <span class="menu-title">Quản Lý Tài Khoản</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-toggle="collapse" href="#settings" aria-expanded="false"
                        aria-controls="settings">

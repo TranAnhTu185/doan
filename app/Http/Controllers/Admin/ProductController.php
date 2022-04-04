@@ -51,6 +51,7 @@ class ProductController extends Controller
             'quantity' => 'required|integer|min:1',
             'NamXB' => 'required|integer|min:4',
             'NXB' => 'required|min:8',
+            'author' => 'required',
             'sale' => 'min:0',
             'image' => 'image',
         ]);
@@ -62,6 +63,7 @@ class ProductController extends Controller
         $product->sale = $request->sale;
         $product->NamXB = $request->NamXB;
         $product->NXB = $request->NXB;
+        $product->author = $request->author;
         $product->description = $request->description;
         $product->content = $request->get('content');
         $product->category_id = $request->category_id;
@@ -121,6 +123,7 @@ class ProductController extends Controller
             'quantity' => 'required|integer|min:1',
             'NamXB' => 'required|integer|min:4',
             'NXB' => 'required|min:10',
+            'author' => 'required',
             'sale' => 'min:0',
             'image' => 'image',
         ]);
@@ -133,6 +136,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->content = $request->get('content');
         $product->NXB = $request->NXB;
+        $product->author = $request->author;
         $product->NamXB = $request->NamXB;
         $product->category_id = $request->category_id;
         $product->status = $request->status;

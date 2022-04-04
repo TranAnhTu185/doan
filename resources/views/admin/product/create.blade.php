@@ -67,7 +67,15 @@ Thêm mới sản phẩm
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
+                                    <label>Tác Giả</label>
+                                    <input class="form-control" name="author" type="text"
+                                           placeholder="Enter Author" required>
+                                    @error('author')
+                                    <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-4">
                                     <label>Nhà Xuất bản</label>
                                     <input class="form-control" name="NXB" type="text"
                                            placeholder="Enter NXB" required>
@@ -75,7 +83,7 @@ Thêm mới sản phẩm
                                     <div class="alert alert-danger" role="alert">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label>Năm Xuất bản</label>
                                     <input class="form-control" name="NamXB" type="number" placeholder="Enter year created">
                                     @error('sale')

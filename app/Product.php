@@ -9,7 +9,7 @@ class Product extends Model
 {
     //Product model
     protected $table = 'products';
-    protected $fillable = ['name', 'quantity', 'NXB', 'NamXB', 'price', 'sale', 'status', 'description', 'content', 'image', 'category_id'];
+    protected $fillable = ['name', 'quantity', 'NXB', 'NamXB', 'author', 'price', 'sale', 'status', 'description', 'content', 'image', 'category_id'];
 
     public function getUrl(){
         return Str::of(strtolower($this->name))->slug('-');

@@ -36,10 +36,10 @@ class HomeController extends Controller
         return view('list_product')->with('list', $list);
     }
 
-    public function list($id, $name) {
-        $list = Product::where('category_id' , $id)->paginate(12);
-        return view('list_product')->with('list', $list);
-    }
+//    public function list($id, $name) {
+//        $list = Product::where('category_id' , $id)->paginate(12);
+//        return view('list_product')->with('list', $list);
+//    }
 
     public function getDetail($id, $name){
         $product = Product::find($id);

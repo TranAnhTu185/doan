@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('quantity');
             $table->string('NXB');
             $table->integer('NamXB');
+            $table->string('author');
             $table->bigInteger('price');
             $table->integer('sale')->nullable();
             $table->integer('status');

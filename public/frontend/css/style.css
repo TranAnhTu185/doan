@@ -958,17 +958,35 @@ a.slider-btn:hover::before {
 .product-rating {
     margin: 11px 0 9px;
 }
+
+.product-price {
+    display: flex;
+    align-items: center;
+}
+
 .product-price > span.old {
     font-size: 14px;
     font-weight: 400;
     text-decoration: line-through;
-}
-.product-price > span {
     color: #646464;
-    display: inline-block;
-    font-size: 20px;
+}
+
+.product-price > span.sale {
+    font-size: 14px;
     font-weight: 500;
-    margin: 0 2px;
+    width: 64px;
+    height: 20px;
+    background-color: red;
+    color: #fff;
+    text-align: center;
+}
+
+.product-price > span {
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0 8px;
+    color: red;
 }
 .product-action-style {
     background-color: #fff;
