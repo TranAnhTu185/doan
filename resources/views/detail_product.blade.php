@@ -40,14 +40,14 @@
             <div class="col-lg-6">
                 <div class="product-details-content">
                     <h2>{{ $product->name }}</h2>
-                    <div class="product-price">
+                    <div class="product-price product-price__detail">
                         @if( $product->sale > 0)
                             <span class="old">{{ number_format($product->price) }}đ</span>
-                            <span>{{ number_format($product->newPrice()) }}đ</span>
-                            <span class="sale">{{ $product->sale }}% Giảm</span>
+                            <span class="span_new">{{ number_format($product->newPrice()) }}đ</span>
+                            <span class="sale">Giảm : {{ $product->sale }}%</span>
                         @endif
                         @if($product->sale ==0)
-                                <span >{{ number_format($product->price) }}đ</span>
+                                <span >Giá TIền : {{ number_format($product->price) }}đ</span>
                         @endif
                     </div>
                     <div class="product-overview">

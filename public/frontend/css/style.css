@@ -962,19 +962,23 @@ a.slider-btn:hover::before {
 .product-price {
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.product-price__detail {
+    justify-content: start;
 }
 
 .product-price > span.old {
     font-size: 14px;
     font-weight: 400;
     text-decoration: line-through;
-    color: #646464;
 }
 
 .product-price > span.sale {
     font-size: 14px;
     font-weight: 500;
-    width: 64px;
+    width: 76px;
     height: 20px;
     background-color: red;
     color: #fff;
@@ -982,6 +986,14 @@ a.slider-btn:hover::before {
 }
 
 .product-price > span {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 4px;
+    color: #646464;
+}
+
+.product-price > span.span_new {
     display: inline-block;
     font-size: 30px;
     font-weight: 500;

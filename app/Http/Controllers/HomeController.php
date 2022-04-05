@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         $product_sale = Product::all()->where('status', '==', 1)->sortByDesc('sale')->take(8);
         $product_limited = Product::all()->where('status', '==', 1)->sortByDesc('quantity')->take(8);
-        $product_featured = Product::all()->where('status', '==', 1)->sortByDesc('prince')->take(8);
+        $product_featured = Product::all()->where('status', '==', 1)->sortByDesc('price')->take(8);
         $product_new = Product::all()->where('status', '==', 1)->sortDesc()->take(8);
         return view('index')->with(['product_sale' => $product_sale, 'product_limited' => $product_limited, 'product_featured' => $product_featured, 'product_new' => $product_new]);
     }
@@ -36,12 +36,7 @@ class HomeController extends Controller
         return view('list_product')->with('list', $list);
     }
 
-//    public function list($id, $name) {
-//        $list = Product::where('category_id' , $id)->paginate(12);
-//        return view('list_product')->with('list', $list);
-//    }
-
-    public function getDetail($id, $name){
+    public function getDetail($id){
         $product = Product::find($id);
         $product_other = Product::where('id', '!=', $id)->where('category_id', "=", $product->category_id)->take(8)->get();
         $comments = Comments::all()->where('product_id', $id);
@@ -129,7 +124,7 @@ class HomeController extends Controller
         $request->validate([
             'name' => 'required|min:2|max:100',
             'phone' => 'required|min:10|max:10',
-            'address' => 'required|min:10|max:255',
+            'address' => 'required|min:3|max:255',
             'email' => 'required|email|unique:customers',
             'password' => 'required|min:8|max:50',
             'password_confirmation' => 'required|min:8|max:50|same:password',
@@ -142,7 +137,7 @@ class HomeController extends Controller
         $customer->email = $request->email;
         $customer->password = bcrypt($request->password);
         $customer->save();
-        return redirect()->route('home.login', '#lg2')->with('success', 'Tạo tài khoản thành công.');
+        return redirect()->route('home.login')->with('success', 'Tạo tài khoản thành công.');
     }
 
     //search

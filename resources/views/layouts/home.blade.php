@@ -8,7 +8,7 @@
     <meta name="_token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/img/logo/images.png') }}">
 
     <!-- all css here -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
@@ -194,28 +194,10 @@
                         <a class="cr-btn btn-style cart-btn-style"
                            href="{{ route('home.cart') }}"><span>Xem giỏ hàng</span></a>
                         <a class="no-mrg cr-btn btn-style cart-btn-style btn-checkout"
-                           href="{{ route('home.checkout') }}"><span>Thanh
-                                    toán</span></a>
+                           href="{{ route('home.checkout') }}"><span>Thanh toán</span></a>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="main-search-active">
-        <div class="sidebar-search-icon">
-            <button class="search-close"><span class="ti-close"></span></button>
-        </div>
-        <div class="sidebar-search-input">
-            <form action="{{ route('home.search') }}" method="get">
-                @csrf
-                <div class="form-search">
-                    <input id="search" class="input-text" name="key" placeholder="Nhập từ khoá để tìm kiếm"
-                           type="text">
-                    <button type="submit">
-                        <i class="ti-search"></i>
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
     <!-- main-search start -->
@@ -297,7 +279,7 @@
                                             <i class="ion-ios-email-outline"></i>
                                         </div>
                                         <div class="food-info-content">
-                                            <p><a href="#">anhtu185ww@gmail.com</a></p>
+                                            <p><a href="#">shopbook@gmail.com</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -356,7 +338,7 @@
                             <form onsubmit="return quickView(this)" method="post" id="form-addCart">
                                 <div class="quickview-plus-minus">
                                     <div class="cart-plus-minus">
-                                        <input type="text" value="02" name="quantity" class="cart-plus-minus-box">
+                                        <input type="text" value="1" name="quantity" class="cart-plus-minus-box">
                                     </div>
                                     <div class="quickview-btn-cart">
                                         <button type="submit" class="btn-style cr-btn" href="#">Thêm vào giỏ

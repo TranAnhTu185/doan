@@ -73,5 +73,4 @@ Bảng điều khiển
         </div>
     </div>
 
-<!-- content-wrapper ends -->
 @endsection

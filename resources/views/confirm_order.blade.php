@@ -12,14 +12,9 @@
             <div class="text-center mt-3">
                 <h3>Đặt hàng thành công</h3>
                 <p>Cảm ơn quý khách đã ủng hộ công ty chúng tôi.</p>
-                <p>Khách hàng đặt hành online vui lòng thanh toán để xác thực đơn hàng.
-                    @if(Auth::guard('customer')->check())
-                        Để xem lịch sử đơn hàng <a class="text-danger"
-                                href="{{ route('home.checkout.history') }}">click tại đây</a>.
-                    @else
-                        Kiểm tra email để xem thông tin đơn hàng.
-                    @endif
-                </p>
+                <a class="btn-style cr-btn" href="{{ route('home.index') }}">
+                    <span>Tiếp tục mua hàng</span>
+                </a>
             </div>
         </div>
     </div>

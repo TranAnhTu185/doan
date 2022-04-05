@@ -20,7 +20,7 @@ class CreateBillsTable extends Migration
             $table->tinyInteger('payments')->nullable;
             $table->tinyInteger('status');
             $table->string('name');
-            $table->integer('phone');
+            $table->char('phone');
             $table->string('address');
             $table->foreign('customer_id')->references('id')
                 ->on('customers')

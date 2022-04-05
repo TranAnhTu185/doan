@@ -37,11 +37,9 @@ Route::get('dang-nhap.html', 'HomeController@loginpage')->name('home.loginpage')
 Route::post('dang-nhap.html', 'HomeController@login')->name('home.login');
 Route::post('dang-ky.html', 'HomeController@register')->name('home.register');
 Route::get('dang-xuat.html', 'HomeController@logout')->name('home.logout');
-//search
-Route::get('tim-kiem.html','HomeController@search')->name('home.search');
+
 //contact
 Route::get('lien-he.html', 'HomeController@contact')->name('home.contact');
-
 
 Route::group(['prefix' => 'admin'], function () {
     //login && logout
@@ -60,19 +58,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('store', 'Admin\ProductController@store')->name('admin.product.store');
             Route::get('edit/{id}', 'Admin\ProductController@edit')->name('admin.product.edit');
             Route::post('update/{id}', 'Admin\ProductController@update')->name('admin.product.update');
-            Route::get('destroy/{id}', 'Admin\ProductController@destroy')->name('admin.product.destroy');
             Route::get('comment/{id}', 'Admin\ProductController@showComment')->name('admin.comment');
             Route::get('comment/delete/{id}', 'Admin\ProductController@deleteCommentProduct')->name('admin.comment.delete');
         });
-        //user
-//        Route::group(['prefix' => 'user'], function () {
-//            Route::get('/', 'Admin\UserController@index')->name('admin.user');
-//            Route::get('create', 'Admin\UserController@create')->name('admin.user.create');
-//            Route::post('store', 'Admin\UserController@store')->name('admin.user.store');
-//            Route::get('edit/{id}', 'Admin\UserController@edit')->name('admin.user.edit');
-//            Route::post('update/{id}', 'Admin\UserController@update')->name('admin.user.update');
-//            Route::get('show/{id}', 'Admin\UserController@show')->name('admin.user.show');
-//            Route::get('destroy/{id}', 'Admin\UserController@destroy')->name('admin.user.destroy');
-//        });
     });
 });

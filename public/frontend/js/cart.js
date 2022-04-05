@@ -114,8 +114,8 @@ function qView(id) {
             $("#product_id").remove();
             $("#name").html(data.name);
             $("#description").html(data.description);
-            $("#price").html(formatNumber(data.price));
-            $("#newPrice").html(formatNumber(data.newPrice));
+            $("#price").html(formatNumber(data.price) + 'đ');
+            $("#newPrice").html(formatNumber(data.newPrice)+ 'đ');
             $("#form-addCart").append('<input type="hidden" id="product_id" name="id" value="'+data.id+'">');
             $("#image").html('<img src="/backend/images/product/'+data.image+'" class="d-block w-100" alt="">');
         }

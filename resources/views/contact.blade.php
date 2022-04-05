@@ -24,7 +24,7 @@
                 </p>
                 <p>Số điện thoại: 0977902031</p>
                 <p>Hotline: 0123456789</p>
-                <p>Email: nokshi@gmail.com</p>
+                <p>Email: shopbook@gmail.com</p>
                 <p>Địa chỉ: Hà Nội</p>
             </div>
         </div>

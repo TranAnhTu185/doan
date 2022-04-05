@@ -31,36 +31,7 @@
                             <li><a href="#product-list" data-view="product-list"><i class="ion-navicon"></i></a></li>
                         </ul>
                     </div>
-                     <div class="shop-filter">
-                        <button class="product-filter-toggle">filter</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <div class="row">
-            <div class="col-lg-12">
-                <div class="product-filter-wrapper">
-                    <div class="row">
-                        <div class="product-filter col-md-6 col-sm-6 col-xs-12 mb-30">
-                            <h5>Sort by</h5>
-                            <ul class="sort-by">
-                                <li><a href="#">Default</a></li>
-                                <li><a href="#">Popularity</a></li>
-                                <li><a href="#">Average rating</a></li>
-                                <li><a href="#">Newness</a></li>
-                                <li><a href="#">Price: Low to High</a></li>
-                                <li><a href="#">Price: High to Low</a></li>
-                            </ul>
-                        </div>
-                        <div class="product-filter col-md-6 col-sm-6 col-xs-12 mb-30">
-                            <h5>Filter by price</h5>
-                            <div id="price-range"></div>
-                            <div class="price-values">
-                                <span>Price:</span>
-                                <input type="text" class="price-amount">
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

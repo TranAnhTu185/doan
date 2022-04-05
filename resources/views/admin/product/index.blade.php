@@ -80,20 +80,11 @@ Sản phẩm
                                                                         <i class="fa fa-eye"></i>
                                                                     </button>
                                                                 </a>
-                                                                <a
-                                                                    href="{{ route('admin.product.edit', $product->id) }}">
+                                                                <a href="{{ route('admin.product.edit', $product->id) }}">
                                                                     <button type="button"
                                                                             class="btn btn-dark btn-rounded btn-icon">
                                                                         <i class="fa fa-edit"></i>
                                                                     </button>
-                                                                </a>
-                                                                <a href="{{ route('admin.product.destroy',$product->id) }}"
-                                                                   onclick="return confirm('Do you want to delete this product?')">
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-rounded btn-icon">
-                                                                        <i class="fa fa-trash-o"></i>
-                                                                    </button>
-                                                                </a>
                                                                 <a href="{{ route('admin.comment',$product->id) }}">
                                                                     <button type="button"
                                                                             class="btn btn-primary btn-rounded btn-icon">
